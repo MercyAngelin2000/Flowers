@@ -126,6 +126,9 @@ section {
 #product .card-text{
   color:#7a0914
 }
+#product .linkColor a{
+  color:#7a0914
+}
 #product .cartItem{
   color:#7a0914;
   background-color: #efc1c1;
