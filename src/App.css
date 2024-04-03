@@ -1,38 +1,156 @@
 .App {
-  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: large;
+  font-style: italic;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: .5rem .5rem;
+  box-shadow: 5px 5px 20px rgba(85, 84, 84, 0.5);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-brand {
+  color: #7a0914;
+  font-size: 26px;
+  font-weight: 600;
+}
+.navbar-brand:hover{
+  color: #41521f;
+  font-size: 28px;
 }
 
-.App-header {
-  background-color: #282c34;
+.nav-item a {
+  color: #7a0914;
+}
+.nav-item a:hover {
+  color:  #7a0914;
+  font-weight: 800;
+}
+.active{
+  color: #41521f !important;
+  font-weight: 800;
+  font-size: larger;
+  padding-top: 5px;
+}
+.imgData .icons {
+  color: #7a0914;
+}
+.imgData .icons:hover {
+  color: #41521f;
+  font-size: larger;
+  padding-top: 3px;
+}
+
+section {
+  width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+#home {
+  padding-top: 90px;
+  background-image: url('./assets/tulip.jpg');
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#home h2 {
+  color: #7a0914
+}
+
+#home .display-3 {
+  color: #41521f;
+}
+
+#home p {
+  color: #e50033;
+}
+
+.bg {
+  background-color: #efc1c1;
+  font-size: larger;
+  font-weight: 700;
+  color: #81020c;
+  padding: 5px;
+}
+#about{
+  padding-top: 90px;
+}
+#about h1 {
+  color: #81020c;
+}
+
+#about img {
+  width: 100%;
+  height: 380px;
+}
+
+#about .img-container {
+  position: relative;
+  color: black;
+}
+
+#about .img-container .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  mix-blend-mode: screen;
+}
+#about .card{
+  color:#7a0914
+}
+#product{
+  padding-top: 90px;
+}
+#product .card{
+ border-radius: 20px;
+ overflow: hidden;
+ box-shadow: 5px 5px 20px rgba(238, 58, 58, 0.5);
+}
+#product .cartImg{
+  width: 100%;
+  height: 200px;
+}
+#product .card-title{
+  color:#7a0914
+}
+#product .card-text{
+  color:#7a0914
+}
+#product .cartItem{
+  color:#7a0914;
+  background-color: #efc1c1;
+  visibility: hidden;
+  position: absolute;
+  top: 61%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#product .card:hover .cartItem{
+    color:#7a0914;
+    background-color: #efc1c1;
+    visibility: visible;
+  } 
+/* progress bar */
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background-color:white;
+}
+.progress-bar {
+  height: 5px;
+  background-color: #7a0914;
+  width: 0%;
+}
+.Toastify__toast-body {
+  font-size: 14px;
 }
