@@ -157,3 +157,40 @@ section {
 .Toastify__toast-body {
   font-size: 14px;
 }
+
+/* Review */
+#review{
+  padding-top: 90px;
+}
+.txtback{
+  color: #7a0914;
+}
+/* contact */
+#contact{
+ padding-bottom: 20px;
+}
+.contactImg{
+  height: 500px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  
+}
+.txtbackcolor{
+  background-color: #7a0914;
+  color: white;
+}
+.txtbackcolor:hover{
+  background-color: #7a0914;
+  color: white;
+}
+.place::placeholder{
+  color: #f18585;
+}
+#contact .card{
+  border-radius: 20px;
+ overflow: hidden;
+ box-shadow: 2px 5px 2px rgba(238, 58, 58, 0.5);
+}
+

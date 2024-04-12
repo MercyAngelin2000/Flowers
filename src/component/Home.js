@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import '../App.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,12 @@ import img6 from '../assets/img6.jpg'
 import img7 from '../assets/img7.avif'
 import img8 from '../assets/img8.jpg'
 import img9 from '../assets/about.jpg'
+import review1 from '../assets/3.jpeg'
+import review2 from '../assets/13.jpeg'
+import review3 from '../assets/muni.jpg'
+import review4 from '../assets/6.jpeg'
+import review5 from '../assets/18.jpeg'
+import contact from '../assets/contact.jpg'
 function Home() {
     const [cardData, setCardData] = useState([
         { "id": 1, "img": img1, "title": "LillyTulips", "rate": "150", "oldrate": "170" },
@@ -24,18 +30,25 @@ function Home() {
         { "id": 7, "img": img7, "title": "Triumph Tulips", "rate": "200", "oldrate": "230" },
         { "id": 8, "img": img8, "title": "Tulipa", "rate": "190", "oldrate": "240" },
         { "id": 9, "img": img9, "title": "Greigii Tulips", "rate": "240", "oldrate": "270" }])
-    const handleTabChange = (e) => {
-        var tabs = ["hometab", "abouttab", "producttab", "reviewtab", "contacttab"]
-        // eslint-disable-next-line
-        tabs?.map((it) => {
-            if (e?.target?.id === it) {
-                document.getElementById(e?.target?.id).className = "nav-link active"
-            }
-            else {
-                document.getElementById(it).className = "nav-link"
-            }
-        })
-    }
+    const [review] = useState([
+        { "id": 1, "img": review1, "title": "Josephin" },
+        { "id": 2, "img": review2, "title": "Vimal" },
+        { "id": 3, "img": review3, "title": "Muni" },
+        { "id": 4, "img": review4, "title": "Ravi" },
+        { "id": 5, "img": review5, "title": "Mercy" },
+    ])
+    // const handleTabChange = (e) => {
+    //     var tabs = ["hometab", "abouttab", "producttab", "reviewtab", "contacttab"]
+    //     // eslint-disable-next-line
+    //     tabs?.map((it) => {
+    //         if (e?.target?.id === it) {
+    //             document.getElementById(e?.target?.id).className = "nav-link active"
+    //         }
+    //         else {
+    //             document.getElementById(it).className = "nav-link"
+    //         }
+    //     })
+    // }
     const handleWishlist = (data) => {
         let value;
         var x = cardData?.map(item => {
@@ -104,6 +117,42 @@ function Home() {
             closeButton:false
         });
     }
+
+    const sectionRefs = useRef([]);
+
+    // Set up the refs for each section
+    const handleRef = (ref, index) => {
+        sectionRefs.current[index] = ref;
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + window.innerHeight / 2; // Adjust for viewport height
+            for (let i = 0; i < sectionRefs.current.length; i++) {
+                const sectionRef = sectionRefs.current[i];
+                if (sectionRef && sectionRef.offsetTop <= scrollPosition && sectionRef.offsetTop + sectionRef.clientHeight > scrollPosition) {
+                    var tabs = ["hometab", "abouttab", "producttab", "reviewtab", "contacttab"]
+                    // eslint-disable-next-line
+                    tabs?.map((it) => {
+                        let x = `${sectionRef.id}tab`
+                        if (x === it) {
+                            document.getElementById(x).className = "nav-link active"
+                        }
+                        else {
+                            document.getElementById(it).className = "nav-link"
+                        }
+                    })
+                    break; // Exit loop once we've found the visible section
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     return (
         <div className='App'>
             {/* navbar */}
@@ -117,7 +166,8 @@ function Home() {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mx-auto" onClick={(e) => handleTabChange(e)}>
+                            {/* onClick={(e) => handleTabChange(e)} */}
+                            <ul className="navbar-nav mx-auto">
                                 <li className="nav-item">
                                     <a className="nav-link active" aria-current="page" href="#home" id="hometab">Home</a>
                                 </li>
@@ -135,20 +185,20 @@ function Home() {
                                 </li>
                             </ul>
                             <div className='imgData'>
-                                <span className='p-2 icons' role='button'>
+                                <span className='p-2 icons' role='button'><a href="#product" className='icons'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
-                                    </svg>
+                                    </svg></a>
                                 </span>
-                                <span className='p-2 icons' role='button'>
+                                <span className='p-2 icons' role='button'><a href="#product" className='icons'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-cart-fill" viewBox="0 0 16 16">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                    </svg>
+                                    </svg></a>
                                 </span>
-                                <span className='p-2 icons' role='button'>
+                                <span className='p-2 icons' role='button'><a href="#contact" className='icons'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                                    </svg>
+                                    </svg></a>
                                 </span>
                             </div>
                         </div>
@@ -159,7 +209,7 @@ function Home() {
                 </div>
             </div>
             {/* Home */}
-            <section id="home">
+            <section id="home" ref={(ref) => handleRef(ref, 0)}>
                 <div className='row col-12'>
                     <div className='col-lg-6 text-center'>
                         <p className='display-3 fw-bold '>Fresh Flowers</p>
@@ -169,7 +219,7 @@ function Home() {
                 </div>
             </section>
             {/* About */}
-            <section id="about">
+            <section id="about" ref={(ref) => handleRef(ref, 1)}>
                 <div className='container-fluid'>
                     <div className='container'>
                         <div className='bg text-center'>About Us</div>
@@ -231,7 +281,7 @@ function Home() {
                 </div>
             </section>
             {/* Product */}
-            <section id="product">
+            <section id="product" ref={(ref) => handleRef(ref, 2)}>
                 <div className='container'>
                     <div className='bg text-center'>Latest Products</div>
                     <div className='row'>
@@ -279,12 +329,64 @@ function Home() {
                 </div>
             </section>
             {/* Review */}
-            <section id="review">
-
+            <section id="review" ref={(ref) => handleRef(ref, 3)}>
+                <div className='container'>
+                    <div className='bg text-center'>Customer's Review</div>
+                    <div className='row'>
+                        {
+                            review?.map(it => (
+                                <div className='col-lg-4 p-2'>
+                                    <div>
+                                        {(() => {
+                                            const arr = [];
+                                            let count = 5
+                                            for (let i = 0; i < count; i++) {
+                                                arr.push(
+                                                    <span className=''>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill m-1 txtback" viewBox="0 0 16 16">
+                                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                        </svg>
+                                                    </span>
+                                                );
+                                            }
+                                            return arr;
+                                        })()}
+                                    </div>
+                                    <p>A quote image is a quote that has been transformed into a picture for visual appeal. Quotes in image form not only look more appealing, they also have more impact. Besides that, they also become more shareable!</p>
+                                    <div className='row'>
+                                        <div className='col-lg-8 row d-flex align-items-start'>
+                                            <div className='col-lg-4'>
+                                                <img src={it?.img} alt={it?.title} className='rounded-circle' height={"50px"} width={"50px"} />
+                                            </div>
+                                            <div className='col-lg-8'>
+                                                <label className='fw-bold'>{it?.title}</label>
+                                                <p><small>Happy Customer</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </section>
             {/* Contact */}
-            <section id="contact">
-
+            <section id="contact" ref={(ref) => handleRef(ref, 4)}>
+                <div className='container'>
+                    <div className='bg text-center'>Contact Us</div>
+                    <div className='row pt-5'>
+                        <div className='col-lg-6 card p-4'>
+                            <input type='text' className='form-control mt-2 place' placeholder='Eg: Mercy Angelin'/>
+                            <input type='email' className='form-control mt-2 place' placeholder='Eg: mercy@gmail.com'/>
+                            <input type='text' className='form-control mt-2 place' placeholder='Eg: +919876543210'/>
+                            <textarea type='text' rows={8} className='form-control mt-2 place' placeholder='Hello everyone...'/>
+                           <button className='btn btn-default mt-2 txtbackcolor place'>Send Message</button>
+                        </div>
+                        <div className='col-lg-6'>
+                        <img src={contact} alt="contact" className='contactImg'/>
+                        </div>
+                    </div>
+                </div>
             </section>
             <ToastContainer
                 position="top-right"
